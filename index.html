@@ -1,922 +1,2071 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GalaxyLand | Minecraft Server</title>
 
 <style>
+
+/* ================= GENERAL ================= */
+
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  scroll-behavior:smooth;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:Tahoma,Arial,sans-serif;
-  background:
-    radial-gradient(circle at 20% 20%,#5220a8 0,transparent 30%),
-    radial-gradient(circle at 80% 80%,#17104d 0,transparent 35%),
-    #07051c;
-  color:#fff;
-  line-height:1.8;
+    font-family:Tahoma,Arial,sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(124,58,237,.18),transparent 30%),
+        radial-gradient(circle at 80% 30%,rgba(168,85,247,.12),transparent 30%),
+        #050313;
+    color:#fff;
+    line-height:1.8;
+    overflow-x:hidden;
 }
 
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(7,5,28,.94);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(255,255,255,.12);
+a{
+    color:inherit;
+    text-decoration:none;
 }
 
-nav{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:14px 20px;
+button,
+input{
+    font-family:inherit;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    position:fixed;
+    top:0;
+    right:0;
+    left:0;
+    z-index:2000;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:14px 6%;
+
+    background:rgba(7,4,24,.86);
+    backdrop-filter:blur(15px);
+
+    border-bottom:1px solid rgba(216,167,255,.12);
 }
 
 .logo{
-  font-size:24px;
-  font-weight:bold;
-  color:#c084ff;
-  text-shadow:0 0 15px #8b35ff;
+    font-size:22px;
+    font-weight:bold;
+    color:#d8a7ff;
+    text-shadow:0 0 15px rgba(168,85,247,.7);
 }
 
-nav ul{
-  list-style:none;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  justify-content:center;
+.nav-links{
+    display:flex;
+    gap:18px;
+    list-style:none;
+    align-items:center;
+    justify-content:center;
 }
 
-nav a{
-  display:block;
-  color:#fff;
-  text-decoration:none;
-  padding:8px 14px;
-  border-radius:10px;
-  background:rgba(168,85,247,.15);
-  border:1px solid rgba(192,132,255,.35);
-  transition:.25s;
-  font-size:15px;
+.nav-links a{
+    color:#ddd;
+    transition:.2s;
+    padding:7px 9px;
+    border-radius:8px;
 }
 
-nav a:hover{
-  color:#fff;
-  background:linear-gradient(135deg,#7c3aed,#a855f7);
-  border-color:#c084ff;
-  box-shadow:0 0 15px rgba(168,85,247,.5);
-  transform:translateY(-2px);
+.nav-links a:hover{
+    color:#d8a7ff;
+    background:rgba(124,58,237,.13);
 }
 
-nav a:active{
-  transform:scale(.95);
+
+/* ================= BACKGROUND ================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(124,58,237,.20),transparent 35%),
+        radial-gradient(circle at 0% 100%,rgba(168,85,247,.12),transparent 30%);
+    pointer-events:none;
 }
+
+body::after{
+    content:"✦   ·   ✧   ·   ✦   ·   ✧   ·   ✦";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    color:rgba(255,255,255,.10);
+    font-size:28px;
+    letter-spacing:35px;
+    line-height:4;
+    pointer-events:none;
+}
+
+
+/* ================= HERO ================= */
 
 .hero{
-  min-height:82vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:70px 20px;
-  position:relative;
-  overflow:hidden;
+    min-height:100vh;
 
-  background-image:
-    linear-gradient(
-      rgba(7,5,28,.60),
-      rgba(20,8,55,.78)
-    ),
-    url("galaxyland-bg.png");
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-}
+    text-align:center;
 
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
+    padding:130px 20px 60px;
 
-  background:
-    radial-gradient(
-      circle at 15% 20%,
-      rgba(255,255,255,.5) 0 1px,
-      transparent 2px
-    ),
-    radial-gradient(
-      circle at 75% 30%,
-      rgba(255,255,255,.4) 0 1px,
-      transparent 2px
-    );
+    background:
+        linear-gradient(
+            rgba(5,3,19,.55),
+            rgba(5,3,19,.90)
+        ),
+        url("galaxyland-bg.png");
 
-  background-size:180px 180px;
-  opacity:.18;
-  pointer-events:none;
+    background-size:cover;
+    background-position:center;
 }
 
 .hero-content{
-  max-width:850px;
-  position:relative;
-  z-index:2;
+    max-width:850px;
 }
 
 .hero h1{
-  font-size:65px;
-  color:#d8a7ff;
-  text-shadow:0 0 25px #8b35ff;
+    font-size:clamp(42px,8vw,85px);
+    color:#fff;
+    text-shadow:
+        0 0 10px #8b5cf6,
+        0 0 35px rgba(168,85,247,.8);
+    margin-bottom:10px;
 }
 
 .hero p{
-  font-size:20px;
-  margin:15px 0 25px;
-  color:#eee;
+    color:#cfc4df;
+    font-size:18px;
+    margin-bottom:25px;
 }
 
+.hero-address{
+    display:inline-block;
+
+    padding:12px 22px;
+
+    border-radius:12px;
+
+    background:rgba(124,58,237,.18);
+
+    border:1px solid rgba(216,167,255,.3);
+
+    color:#e5caff;
+
+    direction:ltr;
+
+    font-weight:bold;
+
+    margin-bottom:25px;
+}
+
+
+/* ================= BUTTON ================= */
+
 .btn{
-  display:inline-block;
-  padding:12px 24px;
-  border-radius:12px;
-  text-decoration:none;
-  color:#fff;
-  background:linear-gradient(135deg,#7c3aed,#a855f7);
-  box-shadow:0 0 18px rgba(168,85,247,.35);
-  border:0;
-  cursor:pointer;
-  font-size:15px;
-  transition:.2s;
+    display:inline-block;
+
+    border:0;
+    cursor:pointer;
+
+    padding:12px 22px;
+
+    border-radius:12px;
+
+    color:white;
+
+    background:linear-gradient(
+        135deg,
+        #7c3aed,
+        #a855f7
+    );
+
+    box-shadow:
+        0 0 20px rgba(168,85,247,.25);
+
+    transition:.2s;
 }
 
 .btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 0 25px rgba(168,85,247,.55);
+    transform:translateY(-2px);
+    box-shadow:
+        0 0 28px rgba(168,85,247,.45);
 }
 
-.btn:active{
-  transform:scale(.96);
-}
+
+/* ================= SECTIONS ================= */
 
 section{
-  max-width:1100px;
-  margin:auto;
-  padding:70px 20px;
+    padding:85px 7%;
+    scroll-margin-top:100px;
 }
 
-.title{
-  text-align:center;
-  font-size:34px;
-  color:#d8a7ff;
-  margin-bottom:35px;
+.section-title{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:40px;
+    color:#e6d4ff;
+    text-shadow:0 0 15px rgba(168,85,247,.35);
 }
 
-.server-box{
-  text-align:center;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:20px;
-  padding:30px;
-  box-shadow:0 0 30px rgba(90,40,180,.2);
+
+/* ================= SERVER ================= */
+
+.server-card{
+    max-width:850px;
+    margin:auto;
+
+    padding:30px;
+
+    border-radius:22px;
+
+    background:rgba(16,10,43,.78);
+
+    border:1px solid rgba(216,167,255,.16);
+
+    box-shadow:
+        0 0 40px rgba(124,58,237,.13);
+
+    text-align:center;
 }
 
 .server-address{
-  font-size:24px;
-  color:#c084ff;
-  margin-bottom:10px;
-  direction:ltr;
-  font-weight:bold;
+    direction:ltr;
+
+    font-size:24px;
+    font-weight:bold;
+
+    color:#d8a7ff;
+
+    margin-bottom:20px;
 }
 
-.server-version{
-  color:#d8a7ff;
-  font-size:18px;
-  margin-bottom:18px;
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+
+    padding:9px 18px;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.05);
+
+    margin-bottom:18px;
 }
 
-#status{
-  font-size:20px;
-  margin:10px;
+.status-dot{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background:#777;
 }
 
-#players{
-  font-size:18px;
-  color:#ddd;
+.status.online .status-dot{
+    background:#35e27d;
+    box-shadow:0 0 12px #35e27d;
 }
+
+.status.offline .status-dot{
+    background:#ff4f70;
+    box-shadow:0 0 12px #ff4f70;
+}
+
+.players{
+    color:#cfc4df;
+}
+
+.last-check{
+    color:#777;
+    font-size:12px;
+    margin-top:12px;
+}
+
+
+/* ================= FEATURES ================= */
 
 .features{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:20px;
+    max-width:1100px;
+    margin:auto;
 }
 
 .feature{
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:20px;
-  padding:25px;
-  text-align:center;
-  transition:.25s;
+    padding:25px;
+
+    border-radius:18px;
+
+    background:rgba(16,10,43,.72);
+
+    border:1px solid rgba(216,167,255,.12);
+
+    text-align:center;
+
+    transition:.2s;
 }
 
 .feature:hover{
-  transform:translateY(-5px);
-  box-shadow:0 0 25px rgba(168,85,247,.25);
+    transform:translateY(-5px);
+
+    border-color:rgba(216,167,255,.3);
+
+    box-shadow:
+        0 0 25px rgba(124,58,237,.16);
+}
+
+.feature-icon{
+    font-size:40px;
+    margin-bottom:10px;
 }
 
 .feature h3{
-  color:#d8a7ff;
-  margin-bottom:8px;
+    color:#d8a7ff;
+    margin-bottom:8px;
 }
+
+.feature p{
+    color:#aaa;
+    font-size:14px;
+}
+
+
+/* ================= RANKS ================= */
 
 .ranks{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+    max-width:1200px;
+    margin:auto;
 }
 
-.rank{
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:20px;
-  padding:25px;
-  text-align:center;
-  cursor:pointer;
-  transition:.25s;
+.rank-card{
+    padding:25px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,15,58,.9),
+            rgba(10,7,30,.9)
+        );
+
+    border:1px solid rgba(216,167,255,.14);
+
+    cursor:pointer;
+
+    text-align:center;
+
+    transition:.25s;
 }
 
-.rank:hover{
-  transform:translateY(-6px);
-  box-shadow:0 0 25px rgba(168,85,247,.3);
+.rank-card:hover{
+    transform:translateY(-6px);
+
+    border-color:rgba(216,167,255,.4);
+
+    box-shadow:
+        0 0 30px rgba(124,58,237,.22);
 }
 
-.rank h3{
-  color:#d8a7ff;
-  font-size:25px;
+.rank-icon{
+    font-size:42px;
+    margin-bottom:10px;
 }
 
-.price{
-  font-size:20px;
-  margin:8px 0;
+.rank-card h3{
+    color:#d8a7ff;
+    font-size:23px;
 }
 
-.duration{
-  color:#bbb;
-  margin-bottom:15px;
+.rank-price{
+    font-size:20px;
+    font-weight:bold;
+    margin:12px 0;
 }
 
-.guide-box,
-.rules-box,
-.channel{
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:20px;
-  padding:30px;
+.rank-time{
+    color:#999;
+    font-size:13px;
 }
 
-.guide-box h3{
-  color:#d8a7ff;
-  margin-bottom:10px;
+.rank-buy{
+    display:block;
+
+    margin-top:18px;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    background:#251344;
+
+    color:#e6d4ff;
 }
 
-.guide-box ol{
-  padding-right:25px;
+.default-rank .rank-buy{
+    background:#17102f;
+    color:#aaa;
 }
 
-.guide-box li{
-  margin:8px 0;
+
+/* ================= GUIDE ================= */
+
+.guide-box{
+    max-width:900px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:20px;
 }
 
-.code{
-  display:block;
-  direction:ltr;
-  text-align:center;
-  background:#03020d;
-  color:#d8a7ff;
-  padding:12px;
-  border-radius:10px;
-  margin:15px 0;
-  font-size:18px;
+.guide-card{
+    padding:25px;
+
+    background:rgba(16,10,43,.75);
+
+    border:1px solid rgba(216,167,255,.13);
+
+    border-radius:18px;
 }
 
-.rules-box ul{
-  padding-right:25px;
+.guide-card h3{
+    color:#d8a7ff;
+    margin-bottom:15px;
 }
 
-.rules-box li{
-  margin:8px 0;
+.guide-card ol{
+    padding-right:22px;
 }
 
-.channel{
-  text-align:center;
+.guide-card li{
+    color:#c4bbd0;
+    margin-bottom:8px;
 }
 
-.channel-id{
-  direction:ltr;
-  display:inline-block;
-  margin-top:15px;
-  padding:12px 25px;
-  border-radius:12px;
-  background:#17102f;
-  color:#d8a7ff;
-  font-size:21px;
-  font-weight:bold;
+.code-address{
+    display:block;
+
+    direction:ltr;
+
+    background:#07051c;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    margin-top:10px;
+
+    color:#d8a7ff;
+
+    text-align:center;
 }
+
+
+/* ================= RULES ================= */
+
+.rules{
+    max-width:850px;
+    margin:auto;
+}
+
+.rules ul{
+    padding-right:25px;
+}
+
+.rules li{
+    margin-bottom:12px;
+    color:#c9c0d5;
+}
+
+.rules li::marker{
+    color:#a855f7;
+}
+
+
+/* ================= CHANNEL ================= */
+
+.channel-box{
+    max-width:700px;
+    margin:auto;
+
+    padding:35px;
+
+    text-align:center;
+
+    background:rgba(16,10,43,.8);
+
+    border-radius:22px;
+
+    border:1px solid rgba(216,167,255,.15);
+}
+
+.channel-url{
+    direction:ltr;
+
+    margin:18px 0;
+
+    color:#d8a7ff;
+
+    font-size:20px;
+}
+
+
+/* ================= FOOTER ================= */
 
 footer{
-  text-align:center;
-  padding:35px 20px;
-  background:rgba(0,0,0,.25);
-  color:#aaa;
+    text-align:center;
+
+    padding:35px 20px;
+
+    color:#777;
+
+    border-top:1px solid rgba(255,255,255,.06);
 }
 
+
+/* ================= MODAL ================= */
+
 .modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:2000;
-  background:rgba(0,0,0,.75);
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:5000;
+
+    background:rgba(0,0,0,.78);
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
 }
 
 .modal-box{
-  width:100%;
-  max-width:500px;
-  background:#100a2b;
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:20px;
-  padding:30px;
-  text-align:center;
-  box-shadow:0 0 40px rgba(124,58,237,.4);
+    position:relative;
+
+    width:100%;
+    max-width:500px;
+
+    padding:30px;
+
+    background:#100a2b;
+
+    border:1px solid rgba(216,167,255,.2);
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 0 45px rgba(124,58,237,.4);
+}
+
+.modal-close{
+    position:absolute;
+
+    left:15px;
+    top:10px;
+
+    background:none;
+
+    border:0;
+
+    color:white;
+
+    font-size:28px;
+
+    cursor:pointer;
 }
 
 .modal-box h2{
-  color:#d8a7ff;
-  margin-bottom:15px;
+    color:#d8a7ff;
+    margin-bottom:15px;
 }
 
-.modal-box p{
-  color:#ddd;
-  margin-bottom:20px;
+.modal-specs{
+    color:#ccc;
+    margin:20px 0;
+    line-height:2;
 }
 
-.close{
-  background:none;
-  border:0;
-  color:#fff;
-  font-size:28px;
-  cursor:pointer;
-  float:left;
+.modal-buy{
+    display:inline-block;
+
+    padding:11px 20px;
+
+    border-radius:11px;
+
+    background:#7c3aed;
 }
 
-.buy{
-  margin-top:10px;
+
+/* ================= SUPPORT ================= */
+
+.support-float{
+    position:fixed;
+
+    left:18px;
+    bottom:18px;
+
+    z-index:3000;
+
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(192,132,255,.45);
+
+    background:#17102f;
+
+    color:#fff;
+
+    font-size:23px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 18px rgba(168,85,247,.35);
 }
 
-@media(max-width:700px){
+.support-overlay{
+    display:none;
 
-  nav{
-    flex-direction:column;
-    gap:12px;
-  }
+    position:fixed;
 
-  nav ul{
-    gap:7px;
-  }
+    inset:0;
 
-  nav a{
-    padding:7px 10px;
+    z-index:4500;
+
+    background:rgba(0,0,0,.72);
+
+    align-items:flex-end;
+    justify-content:flex-start;
+
+    padding:90px 18px 90px;
+}
+
+.support-chat{
+    width:100%;
+    max-width:350px;
+
+    background:#100a2b;
+
+    border:1px solid rgba(216,167,255,.2);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 0 40px rgba(124,58,237,.35);
+
+    position:relative;
+}
+
+.support-close{
+    position:absolute;
+
+    left:12px;
+    top:8px;
+
+    background:none;
+    border:0;
+
+    color:white;
+
+    font-size:26px;
+
+    cursor:pointer;
+}
+
+.support-header{
+    text-align:center;
+}
+
+.support-header h2{
+    color:#d8a7ff;
+    font-size:20px;
+}
+
+.support-header p{
+    color:#aaa;
     font-size:13px;
-  }
-
-  .hero{
-    min-height:75vh;
-  }
-
-  .hero h1{
-    font-size:45px;
-  }
-
-  .hero p{
-    font-size:17px;
-  }
-
-  .title{
-    font-size:28px;
-  }
 }
+
+.support-content{
+    margin-top:20px;
+    text-align:center;
+}
+
+.support-content p{
+    color:#ccc;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.support-rubika{
+    display:block;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    background:#7c3aed;
+
+    color:white;
+}
+
+
+/* ================= PROFILE ================= */
+
+.profile-btn{
+    position:fixed;
+
+    right:18px;
+    bottom:18px;
+
+    z-index:3000;
+
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(192,132,255,.45);
+
+    background:#17102f;
+
+    color:#fff;
+
+    font-size:23px;
+
+    cursor:pointer;
+
+    box-shadow:0 0 18px rgba(168,85,247,.35);
+
+    overflow:hidden;
+}
+
+.profile-btn img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+}
+
+.profile-overlay{
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:4000;
+
+    background:rgba(0,0,0,.75);
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+.profile-box{
+    width:100%;
+    max-width:430px;
+
+    background:#100a2b;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 0 40px rgba(124,58,237,.4);
+
+    position:relative;
+}
+
+.profile-close{
+    background:none;
+
+    border:0;
+
+    color:#fff;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    position:absolute;
+
+    left:15px;
+    top:10px;
+}
+
+.profile-avatar{
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid #a855f7;
+
+    margin-bottom:12px;
+
+    background:#17102f;
+}
+
+.profile-name{
+    color:#d8a7ff;
+
+    font-size:20px;
+
+    margin-bottom:18px;
+}
+
+.profile-input{
+    width:100%;
+
+    padding:12px;
+
+    margin:6px 0;
+
+    border-radius:10px;
+
+    border:1px solid rgba(216,167,255,.25);
+
+    background:#07051c;
+
+    color:#fff;
+
+    outline:none;
+
+    font-family:Tahoma;
+
+    text-align:center;
+}
+
+.profile-file{
+    margin:10px 0;
+
+    color:#ddd;
+
+    font-size:13px;
+
+    width:100%;
+}
+
+.login-note{
+    color:#bbb;
+
+    margin-bottom:15px;
+
+    font-size:13px;
+}
+
+.profile-edit,
+.profile-view{
+    display:none;
+}
+
+.profile-error{
+    color:#ff7b9c;
+
+    font-size:12px;
+
+    margin-top:8px;
+
+    display:none;
+}
+
+.avatar-preview{
+    display:none;
+
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid #a855f7;
+
+    margin:0 auto 12px;
+}
+
+.avatar-title{
+    color:#c9b1e8;
+
+    font-size:13px;
+
+    margin-top:12px;
+}
+
+.minecraft-avatars{
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin:15px 0;
+}
+
+.minecraft-avatar{
+    width:58px;
+    height:58px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    border:2px solid transparent;
+
+    background:#17102f;
+
+    color:white;
+
+    font-size:28px;
+
+    transition:.2s;
+}
+
+.minecraft-avatar:hover{
+    transform:scale(1.08);
+
+    border-color:#a855f7;
+
+    box-shadow:0 0 15px rgba(168,85,247,.5);
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:750px){
+
+    .navbar{
+        flex-direction:column;
+
+        gap:9px;
+
+        padding:10px 8px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .nav-links{
+        display:flex;
+
+        width:100%;
+
+        gap:5px;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+        list-style:none;
+    }
+
+    .nav-links a{
+        display:block;
+
+        padding:5px 8px;
+
+        font-size:12px;
+
+        border-radius:8px;
+
+        background:rgba(124,58,237,.12);
+    }
+
+    .hero{
+        padding-top:155px;
+    }
+
+    section{
+        scroll-margin-top:145px;
+    }
+
+}
+
+@media(max-width:430px){
+
+    .nav-links{
+        gap:3px;
+    }
+
+    .nav-links a{
+        font-size:11px;
+        padding:4px 6px;
+    }
+
+    .hero{
+        padding-top:160px;
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
-<header>
 
-<nav>
+<!-- ================= NAVBAR ================= -->
 
-<div class="logo">
-🌌 GalaxyLand
-</div>
+<nav class="navbar">
 
-<ul>
+    <div class="logo">
+        🌌 GalaxyLand
+    </div>
 
-<li><a href="#home">🏠 خانه</a></li>
-<li><a href="#server">🖥️ سرور</a></li>
-<li><a href="#ranks">💎 رنک‌ها</a></li>
-<li><a href="#guide">📖 آموزش</a></li>
-<li><a href="#rules">📜 قوانین</a></li>
-<li><a href="#rubika">📢 کانال</a></li>
+    <ul class="nav-links">
 
-</ul>
+        <li>
+            <a href="#home">خانه</a>
+        </li>
+
+        <li>
+            <a href="#server">سرور</a>
+        </li>
+
+        <li>
+            <a href="#ranks">رنک‌ها</a>
+        </li>
+
+        <li>
+            <a href="#guide">آموزش</a>
+        </li>
+
+        <li>
+            <a href="#rules">قوانین</a>
+        </li>
+
+        <li>
+            <a href="#channel">کانال</a>
+        </li>
+
+    </ul>
 
 </nav>
 
-</header>
+
+<!-- ================= HERO ================= -->
 
 <section class="hero" id="home">
 
-<div class="hero-content">
+    <div class="hero-content">
 
-<h1>
-GalaxyLand 🌌
-</h1>
+        <h1>
+            GalaxyLand
+        </h1>
 
-<p>
-به سرور ماینکرفت GalaxyLand خوش آمدید!
-<br>
-🚀 ماجراجویی خودت را در کهکشان شروع کن
-</p>
+        <p>
+            🌌 به دنیای کهکشانی GalaxyLand خوش آمدید!
+        </p>
 
-<a href="#server" class="btn">
-🚀 ورود به سرور
-</a>
+        <div class="hero-address">
+            MC.GalaxyLand.IR
+        </div>
 
-</div>
+        <br>
+
+        <a href="#server" class="btn">
+            🚀 ورود به سرور
+        </a>
+
+    </div>
 
 </section>
+
+
+<!-- ================= SERVER ================= -->
 
 <section id="server">
 
-<h2 class="title">
-🖥️ وضعیت سرور
-</h2>
+    <h2 class="section-title">
+        🛰️ وضعیت سرور
+    </h2>
 
-<div class="server-box">
+    <div class="server-card">
 
-<div class="server-address">
-MC.GalaxyLand.IR
-</div>
+        <div class="server-address">
+            MC.GalaxyLand.IR
+        </div>
 
-<div class="server-version">
-🎮 نسخه سرور:
-<b>1.8 تا 1.21.4</b>
-</div>
+        <div id="serverStatus" class="status">
 
-<div id="status">
-⚪ آخرین بررسی: هنوز بررسی‌ای انجام نشده
-</div>
+            <span id="statusDot" class="status-dot"></span>
 
-<div id="players">
-👥 بازیکنان: هنوز بررسی‌ای انجام نشده
-</div>
+            <span id="statusText">
+                آخرین بررسی: هنوز بررسی‌ای انجام نشده
+            </span>
 
-<br>
+        </div>
 
-<a href="#guide" class="btn">
-📖 آموزش ورود
-</a>
+        <div id="playerCount" class="players">
+            👥 بازیکنان آنلاین: —
+        </div>
 
-</div>
+        <div id="lastCheck" class="last-check">
+            آخرین بررسی: هنوز بررسی‌ای انجام نشده
+        </div>
+
+        <br>
+
+        <button class="btn" onclick="checkServerStatus(true)">
+            🔄 بررسی وضعیت
+        </button>
+
+    </div>
 
 </section>
+
+
+<!-- ================= FEATURES ================= -->
 
 <section>
 
-<h2 class="title">
-✨ امکانات GalaxyLand
-</h2>
+    <h2 class="section-title">
+        ✨ امکانات GalaxyLand
+    </h2>
 
-<div class="features">
+    <div class="features">
 
-<div class="feature">
-<h3>🌌 دنیای جذاب</h3>
-<p>
-ماجراجویی در دنیای بزرگ GalaxyLand
-</p>
-</div>
+        <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3>سرعت بالا</h3>
+            <p>سروری قدرتمند برای تجربه‌ای روان.</p>
+        </div>
 
-<div class="feature">
-<h3>🏆 رنک‌های ویژه</h3>
-<p>
-رنک‌های مختلف با امکانات متنوع
-</p>
-</div>
+        <div class="feature">
+            <div class="feature-icon">🌌</div>
+            <h3>دنیای جذاب</h3>
+            <p>وارد دنیای GalaxyLand شوید.</p>
+        </div>
 
-<div class="feature">
-<h3>⚡ سرور قدرتمند</h3>
-<p>
-تجربه‌ای روان و سرگرم‌کننده
-</p>
-</div>
+        <div class="feature">
+            <div class="feature-icon">🛡️</div>
+            <h3>امنیت</h3>
+            <p>محیطی مناسب برای بازی و دوستان.</p>
+        </div>
 
-<div class="feature">
-<h3>👥 جامعه دوستانه</h3>
-<p>
-با بازیکنان دیگر بازی و رقابت کن
-</p>
-</div>
+        <div class="feature">
+            <div class="feature-icon">👥</div>
+            <h3>جامعه بازیکنان</h3>
+            <p>با بازیکنان دیگر همراه شوید.</p>
+        </div>
 
-</div>
+    </div>
 
 </section>
+
+
+<!-- ================= RANKS ================= -->
 
 <section id="ranks">
 
-<h2 class="title">
-💎 رنک‌های GalaxyLand
-</h2>
+    <h2 class="section-title">
+        👑 رنک‌های GalaxyLand
+    </h2>
 
-<div class="ranks">
+    <div class="ranks">
 
-<div class="rank" onclick="showRank('Default')">
-<h3>Default</h3>
-<div class="price">رایگان</div>
-<div class="duration">♾️ دائمی</div>
-<button class="btn">مشاهده مشخصات</button>
-</div>
+        <div class="rank-card default-rank" onclick="openRank('default')">
 
-<div class="rank" onclick="showRank('VIP')">
-<h3>VIP</h3>
-<div class="price">50,000 تومان</div>
-<div class="duration">📅 1 ماه</div>
-<button class="btn">مشاهده مشخصات</button>
-</div>
+            <div class="rank-icon">🪨</div>
 
-<div class="rank" onclick="showRank('MVP')">
-<h3>MVP</h3>
-<div class="price">100,000 تومان</div>
-<div class="duration">📅 1 ماه</div>
-<button class="btn">مشاهده مشخصات</button>
-</div>
+            <h3>Default</h3>
 
-<div class="rank" onclick="showRank('MVP+')">
-<h3>MVP+</h3>
-<div class="price">150,000 تومان</div>
-<div class="duration">📅 1 ماه</div>
-<button class="btn">مشاهده مشخصات</button>
-</div>
+            <div class="rank-price">
+                رایگان
+            </div>
 
-<div class="rank" onclick="showRank('GALAXY')">
-<h3>🌌 GALAXY</h3>
-<div class="price">250,000 تومان</div>
-<div class="duration">📅 1 ماه</div>
-<button class="btn">مشاهده مشخصات</button>
-</div>
+            <div class="rank-time">
+                دائمی
+            </div>
 
-<div class="rank" onclick="showRank('SPONSER')">
-<h3>👑 SPONSER</h3>
-<div class="price">500,000 تومان</div>
-<div class="duration">📅 45 روز</div>
-<button class="btn">مشاهده مشخصات</button>
-</div>
+            <div class="rank-buy">
+                👀 مشاهده مشخصات
+            </div>
 
-</div>
+        </div>
+
+
+        <div class="rank-card" onclick="openRank('vip')">
+
+            <div class="rank-icon">⭐</div>
+
+            <h3>VIP</h3>
+
+            <div class="rank-price">
+                ۵۰,۰۰۰ تومان
+            </div>
+
+            <div class="rank-time">
+                ۱ ماه
+            </div>
+
+            <div class="rank-buy">
+                🛒 خرید رنک — پیوی
+            </div>
+
+        </div>
+
+
+        <div class="rank-card" onclick="openRank('mvp')">
+
+            <div class="rank-icon">💎</div>
+
+            <h3>MVP</h3>
+
+            <div class="rank-price">
+                ۱۰۰,۰۰۰ تومان
+            </div>
+
+            <div class="rank-time">
+                ۱ ماه
+            </div>
+
+            <div class="rank-buy">
+                🛒 خرید رنک — پیوی
+            </div>
+
+        </div>
+
+
+        <div class="rank-card" onclick="openRank('mvpplus')">
+
+            <div class="rank-icon">💠</div>
+
+            <h3>MVP+</h3>
+
+            <div class="rank-price">
+                ۱۵۰,۰۰۰ تومان
+            </div>
+
+            <div class="rank-time">
+                ۱ ماه
+            </div>
+
+            <div class="rank-buy">
+                🛒 خرید رنک — پیوی
+            </div>
+
+        </div>
+
+
+        <div class="rank-card" onclick="openRank('galaxy')">
+
+            <div class="rank-icon">🌌</div>
+
+            <h3>GALAXY</h3>
+
+            <div class="rank-price">
+                ۲۵۰,۰۰۰ تومان
+            </div>
+
+            <div class="rank-time">
+                ۱ ماه
+            </div>
+
+            <div class="rank-buy">
+                🛒 خرید رنک — پیوی
+            </div>
+
+        </div>
+
+
+        <div class="rank-card" onclick="openRank('sponser')">
+
+            <div class="rank-icon">👑</div>
+
+            <h3>SPONSER</h3>
+
+            <div class="rank-price">
+                ۵۰۰,۰۰۰ تومان
+            </div>
+
+            <div class="rank-time">
+                ۴۵ روز
+            </div>
+
+            <div class="rank-buy">
+                🛒 خرید رنک — پیوی
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
+
+
+<!-- ================= GUIDE ================= -->
 
 <section id="guide">
 
-<h2 class="title">
-📖 آموزش ورود به سرور
-</h2>
+    <h2 class="section-title">
+        📚 آموزش ورود به سرور
+    </h2>
 
-<div class="guide-box">
+    <div class="guide-box">
 
-<h3>📱 PojavLauncher</h3>
+        <div class="guide-card">
 
-<ol>
+            <h3>📱 PojavLauncher</h3>
 
-<li>
-نسخه Minecraft را روی 1.21.4 یا یکی از نسخه‌های پشتیبانی‌شده قرار بده.
-</li>
+            <ol>
 
-<li>
-وارد بخش Multiplayer شو.
-</li>
+                <li>
+                    نسخه Minecraft را روی <b>1.21.4</b> قرار بده.
+                </li>
 
-<li>
-روی Add Server بزن.
-</li>
+                <li>
+                    وارد Multiplayer شو.
+                </li>
 
-<li>
-در قسمت Server Address بنویس:
-</li>
+                <li>
+                    روی Add Server بزن.
+                </li>
 
-</ol>
+                <li>
+                    در Server Address بنویس:
+                </li>
 
-<div class="code">
-MC.GalaxyLand.IR
-</div>
+            </ol>
 
-<ol start="5">
+            <span class="code-address">
+                MC.GalaxyLand.IR
+            </span>
 
-<li>روی Done بزن.</li>
-<li>سرور GalaxyLand را انتخاب کن و وارد شو.</li>
+            <ol start="5">
 
-</ol>
+                <li>
+                    روی Done بزن.
+                </li>
 
-<br>
+                <li>
+                    وارد GalaxyLand شو.
+                </li>
 
-<h3>💻 TLauncher</h3>
+            </ol>
 
-<ol>
+        </div>
 
-<li>نسخه Minecraft را انتخاب کن.</li>
-<li>وارد Multiplayer شو.</li>
-<li>روی Add Server بزن.</li>
-<li>آدرس زیر را وارد کن:</li>
 
-</ol>
+        <div class="guide-card">
 
-<div class="code">
-MC.GalaxyLand.IR
-</div>
+            <h3>💻 TLauncher</h3>
 
-<ol start="5">
+            <ol>
 
-<li>روی Done بزن.</li>
-<li>وارد GalaxyLand شو.</li>
+                <li>
+                    Minecraft 1.21.4 را انتخاب کن.
+                </li>
 
-</ol>
+                <li>
+                    وارد Multiplayer شو.
+                </li>
 
-</div>
+                <li>
+                    روی Add Server بزن.
+                </li>
+
+                <li>
+                    Server Address را وارد کن:
+                </li>
+
+            </ol>
+
+            <span class="code-address">
+                MC.GalaxyLand.IR
+            </span>
+
+            <ol start="5">
+
+                <li>
+                    روی Done بزن.
+                </li>
+
+                <li>
+                    وارد سرور شو.
+                </li>
+
+            </ol>
+
+        </div>
+
+    </div>
 
 </section>
+
+
+<!-- ================= RULES ================= -->
 
 <section id="rules">
 
-<h2 class="title">
-📜 قوانین سرور
-</h2>
+    <h2 class="section-title">
+        📜 قوانین سرور
+    </h2>
 
-<div class="rules-box">
+    <div class="rules">
 
-<ul>
+        <ul>
 
-<li>❌ استفاده از هرگونه تقلب و Cheat ممنوع است.</li>
-<li>❌ توهین و ایجاد مزاحمت برای بازیکنان ممنوع است.</li>
-<li>❌ سوءاستفاده از باگ‌های سرور ممنوع است.</li>
-<li>🤝 به بازیکنان دیگر احترام بگذارید.</li>
-<li>⚠️ قوانین ممکن است در آینده به‌روزرسانی شوند.</li>
+            <li>
+                به بازیکنان دیگر احترام بگذارید.
+            </li>
 
-</ul>
+            <li>
+                از توهین و ایجاد مزاحمت خودداری کنید.
+            </li>
 
-</div>
+            <li>
+                از تقلب و روش‌های ناعادلانه استفاده نکنید.
+            </li>
+
+            <li>
+                از سوءاستفاده از باگ‌های سرور خودداری کنید.
+            </li>
+
+            <li>
+                تبلیغات بدون اجازه ممنوع است.
+            </li>
+
+            <li>
+                قوانین مدیریت سرور را رعایت کنید.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CHANNEL ================= -->
+
+<section id="channel">
+
+    <h2 class="section-title">
+        📢 کانال GalaxyLand
+    </h2>
+
+    <div class="channel-box">
+
+        <p>
+            اخبار، اطلاعیه‌ها و اتفاقات سرور را
+            از کانال روبیکا دنبال کنید.
+        </p>
+
+        <div class="channel-url">
+            rubika.ir/GalaxyLand1
+        </div>
+
+        <a
+            href="https://rubika.ir/GalaxyLand1"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn"
+        >
+            📢 ورود به کانال روبیکا
+        </a>
+
+    </div>
 
 </section>
 
-<section id="rubika">
 
-<h2 class="title">
-📢 کانال رسمی GalaxyLand
-</h2>
-
-<div class="channel">
-
-<p>
-برای دریافت اخبار، اطلاعیه‌ها و آپدیت‌های GalaxyLand
-عضو کانال ما شوید:
-</p>
-
-<div class="channel-id">
-rubika.ir/GalaxyLand1
-</div>
-
-<br><br>
-
-<a
-href="https://rubika.ir/GalaxyLand1"
-target="_blank"
-class="btn">
-
-📢 ورود به کانال
-
-</a>
-
-</div>
-
-</section>
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
-<p>🌌 GalaxyLand</p>
-<p>تمام حقوق برای GalaxyLand محفوظ است.</p>
+    🌌 GalaxyLand
+    <br>
+    Minecraft Server
 
 </footer>
 
-<div class="modal" id="rankModal">
 
-<div class="modal-box">
+<!-- ================= RANK MODAL ================= -->
 
-<button class="close" onclick="closeModal()">
-×
+<div
+    class="modal"
+    id="rankModal"
+    onclick="closeRankOutside(event)"
+>
+
+    <div
+        class="modal-box"
+        onclick="event.stopPropagation()"
+    >
+
+        <button class="modal-close" onclick="closeRank()">
+            ×
+        </button>
+
+        <h2 id="modalRankName">
+            رنک
+        </h2>
+
+        <div
+            id="modalRankSpecs"
+            class="modal-specs"
+        ></div>
+
+        <a
+            id="modalBuy"
+            class="modal-buy"
+            href="https://rubika.ir/Moein_Persian"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            🛒 خرید رنک — پیوی
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ================= SUPPORT ================= -->
+
+<button
+    class="support-float"
+    onclick="openSupport()"
+    aria-label="پشتیبانی"
+>
+    🎧
 </button>
 
-<h2 id="modalTitle"></h2>
 
-<p id="modalText"></p>
+<div
+    class="support-overlay"
+    id="supportOverlay"
+    onclick="closeSupportOutside(event)"
+>
 
-<a
-id="buyButton"
-href="https://rubika.ir/Moein_Persian"
-target="_blank"
-class="btn buy">
+    <div
+        class="support-chat"
+        onclick="event.stopPropagation()"
+    >
 
-🛒 خرید رنک — پیوی
+        <button
+            class="support-close"
+            onclick="closeSupport()"
+        >
+            ×
+        </button>
 
-</a>
+        <div class="support-header">
+
+            <h2>
+                🎧 پشتیبانی GalaxyLand
+            </h2>
+
+            <p>
+                پاسخگوی سوالات شما هستیم 🌌
+            </p>
+
+        </div>
+
+        <div class="support-content">
+
+            <p>
+                برای ارتباط با پشتیبانی،
+                روی دکمه زیر بزنید.
+            </p>
+
+            <a
+                href="https://rubika.ir/Moein_Persian"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="support-rubika"
+            >
+                💬 پیام به پشتیبانی در روبیکا
+            </a>
+
+        </div>
+
+    </div>
 
 </div>
 
+
+<!-- ================= PROFILE BUTTON ================= -->
+
+<button
+    class="profile-btn"
+    onclick="openProfile()"
+    aria-label="پروفایل"
+>
+
+    <img
+        id="profileButtonImage"
+        alt="پروفایل"
+    >
+
+    <span id="profileButtonIcon">
+        👤
+    </span>
+
+</button>
+
+
+<!-- ================= PROFILE ================= -->
+
+<div
+    class="profile-overlay"
+    id="profileOverlay"
+    onclick="closeProfileOutside(event)"
+>
+
+    <div
+        class="profile-box"
+        onclick="event.stopPropagation()"
+    >
+
+        <button
+            class="profile-close"
+            onclick="closeProfile()"
+        >
+            ×
+        </button>
+
+
+        <!-- LOGIN -->
+
+        <div id="profileLogin">
+
+            <div
+                style="
+                width:90px;
+                height:90px;
+                border-radius:50%;
+                margin:0 auto 12px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#17102f;
+                border:2px solid #a855f7;
+                font-size:42px;
+                "
+            >
+                ⛏️
+            </div>
+
+            <h2>
+                👋 خوش آمدی به GalaxyLand
+            </h2>
+
+            <p class="login-note">
+                برای ورود فقط اسمت را بنویس.
+            </p>
+
+            <input
+                id="firstNameInput"
+                class="profile-input"
+                type="text"
+                maxlength="30"
+                placeholder="اسمت را بنویس"
+            >
+
+            <br>
+
+            <button
+                class="btn"
+                onclick="createProfile()"
+            >
+                🚀 ورود به GalaxyLand
+            </button>
+
+        </div>
+
+
+        <!-- VIEW -->
+
+        <div
+            id="profileView"
+            class="profile-view"
+        >
+
+            <img
+                id="profileViewImage"
+                class="profile-avatar"
+                alt="پروفایل"
+            >
+
+            <div
+                id="profileViewIcon"
+                style="
+                width:90px;
+                height:90px;
+                border-radius:50%;
+                margin:0 auto 12px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#17102f;
+                border:2px solid #a855f7;
+                font-size:40px;
+                "
+            >
+                👤
+            </div>
+
+            <div
+                id="profileViewName"
+                class="profile-name"
+            ></div>
+
+            <button
+                class="btn"
+                onclick="showEditProfile()"
+            >
+                ✏️ ویرایش پروفایل
+            </button>
+
+        </div>
+
+
+        <!-- EDIT -->
+
+        <div
+            id="profileEdit"
+            class="profile-edit"
+        >
+
+            <h2>
+                ✏️ ویرایش پروفایل
+            </h2>
+
+            <img
+                id="profileEditImage"
+                class="avatar-preview"
+                alt="پیش‌نمایش"
+            >
+
+            <div
+                id="profileEditIcon"
+                style="
+                width:90px;
+                height:90px;
+                border-radius:50%;
+                margin:0 auto 12px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#17102f;
+                border:2px solid #a855f7;
+                font-size:40px;
+                "
+            >
+                👤
+            </div>
+
+            <input
+                id="editNameInput"
+                class="profile-input"
+                type="text"
+                maxlength="30"
+                placeholder="نام جدید"
+            >
+
+            <div class="avatar-title">
+                🎮 آواتار ماینکرفتی
+            </div>
+
+            <div class="minecraft-avatars">
+
+                <button
+                    type="button"
+                    class="minecraft-avatar"
+                    onclick="selectAvatar('steve')"
+                >
+                    🧑
+                </button>
+
+                <button
+                    type="button"
+                    class="minecraft-avatar"
+                    onclick="selectAvatar('creeper')"
+                >
+                    💚
+                </button>
+
+                <button
+                    type="button"
+                    class="minecraft-avatar"
+                    onclick="selectAvatar('diamond')"
+                >
+                    💎
+                </button>
+
+                <button
+                    type="button"
+                    class="minecraft-avatar"
+                    onclick="selectAvatar('nether')"
+                >
+                    🔥
+                </button>
+
+                <button
+                    type="button"
+                    class="minecraft-avatar"
+                    onclick="selectAvatar('end')"
+                >
+                    👁️
+                </button>
+
+            </div>
+
+            <div class="avatar-title">
+                یا عکس خودت را از گالری انتخاب کن:
+            </div>
+
+            <input
+                id="avatarInput"
+                class="profile-file"
+                type="file"
+                accept="image/*"
+            >
+
+            <div
+                id="profileError"
+                class="profile-error"
+            ></div>
+
+            <br>
+
+            <button
+                class="btn"
+                onclick="saveProfile()"
+            >
+                💾 ذخیره پروفایل
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
+
 
 <script>
 
 /* ================= SERVER STATUS ================= */
 
-const SERVER_HOST = "MC.GalaxyLand.IR";
-const SERVER_PORT = 25565;
+const SERVER_ADDRESS = "MC.GalaxyLand.IR";
+const SERVER_PORT = "25565";
 
-const API_URL =
-  "https://api.mcsrvstat.us/3/" +
-  SERVER_HOST +
-  ":" +
-  SERVER_PORT;
+const STATUS_API =
+    "https://api.mcsrvstat.us/3/" +
+    SERVER_ADDRESS +
+    ":" +
+    SERVER_PORT;
 
-const CHECK_INTERVAL = 5000;
-const TIMEOUT = 5000;
-
-const statusElement =
-  document.getElementById("status");
-
-const playersElement =
-  document.getElementById("players");
-
-let hasCheckedSuccessfully = false;
-let lastStatus = null;
-let lastPlayers = null;
+let lastValidStatus = null;
 
 
-async function updateServerStatus(){
+async function checkServerStatus(){
 
-  const controller =
-    new AbortController();
+    const status =
+        document.getElementById("serverStatus");
 
-  const timeout =
-    setTimeout(() => {
-      controller.abort();
-    }, TIMEOUT);
+    const statusText =
+        document.getElementById("statusText");
+
+    const players =
+        document.getElementById("playerCount");
+
+    const lastCheck =
+        document.getElementById("lastCheck");
 
 
-  try {
+    const controller =
+        new AbortController();
 
-    const response =
-      await fetch(
-        API_URL,
-        {
-          method:"GET",
-          cache:"no-store",
-          signal:controller.signal
+    const timeout =
+        setTimeout(
+            ()=>controller.abort(),
+            5000
+        );
+
+
+    try{
+
+        const response =
+            await fetch(
+                STATUS_API,
+                {
+                    cache:"no-store",
+                    signal:controller.signal
+                }
+            );
+
+        if(!response.ok){
+            throw new Error("HTTP Error");
         }
-      );
+
+        const data =
+            await response.json();
+
+        clearTimeout(timeout);
 
 
-    clearTimeout(timeout);
+        const online =
+            data.online === true;
+
+        const count =
+            online &&
+            data.players &&
+            typeof data.players.online === "number"
+            ? data.players.online
+            : 0;
 
 
-    if(!response.ok){
-      throw new Error("Server status error");
-    }
+        lastValidStatus = {
+            online:online,
+            players:count
+        };
 
 
-    const data =
-      await response.json();
+        if(online){
+
+            status.className =
+                "status online";
+
+            statusText.textContent =
+                "🟢 سرور آنلاین است";
+
+            players.textContent =
+                "👥 بازیکنان آنلاین: " + count;
+
+        }else{
+
+            status.className =
+                "status offline";
+
+            statusText.textContent =
+                "🔴 سرور آفلاین است";
+
+            players.textContent =
+                "👥 بازیکنان آنلاین: 0";
+
+        }
 
 
-    if(data.online === true){
+        const now =
+            new Date();
 
-      hasCheckedSuccessfully = true;
-      lastStatus = "online";
-
-
-      const online =
-        data.players &&
-        typeof data.players.online === "number"
-        ? data.players.online
-        : 0;
-
-
-      const max =
-        data.players &&
-        typeof data.players.max === "number"
-        ? data.players.max
-        : "?";
+        lastCheck.textContent =
+            "آخرین بررسی: " +
+            now.toLocaleTimeString(
+                "fa-IR",
+                {
+                    hour:"2-digit",
+                    minute:"2-digit",
+                    second:"2-digit"
+                }
+            );
 
 
-      lastPlayers =
-        "👥 بازیکنان آنلاین: "
-        + online
-        + " / "
-        + max;
+    }catch(error){
 
+        clearTimeout(timeout);
 
-      statusElement.innerText =
-        "🟢 سرور آنلاین است";
+        /*
+        در صورت خطای موقت،
+        آخرین وضعیت معتبر حفظ می‌شود.
+        */
 
+        if(lastValidStatus){
 
-      playersElement.innerText =
-        lastPlayers;
+            if(lastValidStatus.online){
 
-    }
+                status.className =
+                    "status online";
 
-    else{
+                statusText.textContent =
+                    "🟢 سرور آنلاین است";
 
-      hasCheckedSuccessfully = true;
-      lastStatus = "offline";
+                players.textContent =
+                    "👥 بازیکنان آنلاین: " +
+                    lastValidStatus.players;
 
+            }else{
 
-      lastPlayers =
-        "👥 بازیکنان آنلاین: 0";
+                status.className =
+                    "status offline";
 
+                statusText.textContent =
+                    "🔴 سرور آفلاین است";
 
-      statusElement.innerText =
-        "🔴 سرور آفلاین است";
+                players.textContent =
+                    "👥 بازیکنان آنلاین: 0";
 
+            }
 
-      playersElement.innerText =
-        lastPlayers;
-
-    }
-
-
-  }catch(error){
-
-    clearTimeout(timeout);
-
-
-    if(!hasCheckedSuccessfully){
-
-      statusElement.innerText =
-        "⚪ آخرین بررسی: هنوز بررسی‌ای انجام نشده";
-
-
-      playersElement.innerText =
-        "👥 بازیکنان: هنوز بررسی‌ای انجام نشده";
-
-    }
-
-    else if(lastStatus === "online"){
-
-      statusElement.innerText =
-        "🟢 سرور آنلاین است";
-
-
-      playersElement.innerText =
-        lastPlayers;
-
-    }
-
-    else if(lastStatus === "offline"){
-
-      statusElement.innerText =
-        "🔴 سرور آفلاین است";
-
-
-      playersElement.innerText =
-        lastPlayers;
+        }
 
     }
-
-  }
 
 }
 
 
-updateServerStatus();
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
 
+        checkServerStatus();
 
-setInterval(
-  updateServerStatus,
-  CHECK_INTERVAL
+        setInterval(
+            checkServerStatus,
+            5000
+        );
+
+    }
 );
 
 
@@ -924,83 +2073,883 @@ setInterval(
 
 const ranks = {
 
-  "Default":
-  "رنک پیش‌فرض و رایگان سرور. مناسب برای شروع بازی در GalaxyLand.",
+    default:{
+        name:"🪨 Default",
+        price:"رایگان",
+        time:"دائمی",
+        specs:[
+            "دسترسی پایه به سرور",
+            "مناسب برای شروع بازی",
+            "بدون هزینه"
+        ]
+    },
 
-  "VIP":
-  "رنک VIP با امکانات ویژه. مدت اعتبار: 1 ماه. قیمت: 50,000 تومان.",
+    vip:{
+        name:"⭐ VIP",
+        price:"۵۰,۰۰۰ تومان",
+        time:"۱ ماه",
+        specs:[
+            "دسترسی به امکانات VIP",
+            "پرستیژ VIP",
+            "امکانات اختصاصی رنک"
+        ]
+    },
 
-  "MVP":
-  "رنک MVP با امکانات بیشتر و قابلیت‌های ویژه. مدت اعتبار: 1 ماه. قیمت: 100,000 تومان.",
+    mvp:{
+        name:"💎 MVP",
+        price:"۱۰۰,۰۰۰ تومان",
+        time:"۱ ماه",
+        specs:[
+            "تمام امکانات VIP",
+            "امکانات بیشتر برای بازیکن",
+            "پرستیژ MVP"
+        ]
+    },
 
-  "MVP+":
-  "رنک MVP+ با امکانات ویژه‌تر. مدت اعتبار: 1 ماه. قیمت: 150,000 تومان.",
+    mvpplus:{
+        name:"💠 MVP+",
+        price:"۱۵۰,۰۰۰ تومان",
+        time:"۱ ماه",
+        specs:[
+            "تمام امکانات MVP",
+            "امکانات اختصاصی بیشتر",
+            "پرستیژ MVP+"
+        ]
+    },
 
-  "GALAXY":
-  "رنک GALAXY برای بازیکنان ویژه GalaxyLand. مدت اعتبار: 1 ماه. قیمت: 250,000 تومان.",
+    galaxy:{
+        name:"🌌 GALAXY",
+        price:"۲۵۰,۰۰۰ تومان",
+        time:"۱ ماه",
+        specs:[
+            "تمام امکانات رنک‌های قبلی",
+            "امکانات اختصاصی GALAXY",
+            "پرستیژ ویژه GalaxyLand"
+        ]
+    },
 
-  "SPONSER":
-  "رنک SPONSER ویژه با اعتبار 45 روز. قیمت: 500,000 تومان."
+    sponser:{
+        name:"👑 SPONSER",
+        price:"۵۰۰,۰۰۰ تومان",
+        time:"۴۵ روز",
+        specs:[
+            "رنک ویژه SPONSER",
+            "امکانات اختصاصی",
+            "پرستیژ ویژه سرور"
+        ]
+    }
 
 };
 
 
-function showRank(rank){
+function openRank(id){
 
-  document.getElementById("modalTitle")
-    .innerText =
-    "💎 رنک " + rank;
+    const rank = ranks[id];
 
-
-  document.getElementById("modalText")
-    .innerText =
-    ranks[rank];
+    if(!rank)return;
 
 
-  const buyButton =
-    document.getElementById("buyButton");
+    document.getElementById(
+        "modalRankName"
+    ).textContent =
+        rank.name;
 
 
-  if(rank === "Default"){
+    document.getElementById(
+        "modalRankSpecs"
+    ).innerHTML =
 
-    buyButton.style.display =
-      "none";
+        "<p>💰 قیمت: <b>" +
+        rank.price +
+        "</b></p>" +
 
-  }else{
+        "<p>⏳ مدت: <b>" +
+        rank.time +
+        "</b></p>" +
 
-    buyButton.style.display =
-      "inline-block";
+        "<hr style='border-color:rgba(255,255,255,.08);margin:15px 0'>" +
 
-  }
-
-
-  document.getElementById("rankModal")
-    .style.display =
-    "flex";
-
-}
-
-
-function closeModal(){
-
-  document.getElementById("rankModal")
-    .style.display =
-    "none";
-
-}
+        rank.specs
+        .map(
+            x=>"<p>✨ " + x + "</p>"
+        )
+        .join("");
 
 
-document.getElementById("rankModal")
-  .addEventListener(
-    "click",
-    function(e){
+    const buy =
+        document.getElementById("modalBuy");
 
-      if(e.target === this){
-        closeModal();
-      }
+
+    if(id==="default"){
+
+        buy.style.display="none";
+
+    }else{
+
+        buy.style.display="inline-block";
+
+        buy.href =
+            "https://rubika.ir/Moein_Persian";
 
     }
-  );
+
+
+    document.getElementById(
+        "rankModal"
+    ).style.display="flex";
+
+}
+
+
+function closeRank(){
+
+    document.getElementById(
+        "rankModal"
+    ).style.display="none";
+
+}
+
+
+function closeRankOutside(event){
+
+    if(
+        event.target ===
+        document.getElementById("rankModal")
+    ){
+
+        closeRank();
+
+    }
+
+}
+
+
+/* ================= SUPPORT ================= */
+
+function openSupport(){
+
+    document.getElementById(
+        "supportOverlay"
+    ).style.display="flex";
+
+}
+
+
+function closeSupport(){
+
+    document.getElementById(
+        "supportOverlay"
+    ).style.display="none";
+
+}
+
+
+function closeSupportOutside(event){
+
+    if(
+        event.target ===
+        document.getElementById("supportOverlay")
+    ){
+
+        closeSupport();
+
+    }
+
+}
+
+
+/* ================= PROFILE ================= */
+
+const PROFILE_KEY =
+    "galaxyland_profile";
+
+let selectedAvatar = "";
+
+
+function getProfile(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(PROFILE_KEY)
+        ) || null;
+
+    }catch(e){
+
+        return null;
+
+    }
+
+}
+
+
+function saveProfileData(profile){
+
+    try{
+
+        localStorage.setItem(
+            PROFILE_KEY,
+            JSON.stringify(profile)
+        );
+
+        return true;
+
+    }catch(e){
+
+        showProfileError(
+            "حجم عکس زیاد است. یک عکس کوچک‌تر انتخاب کن."
+        );
+
+        return false;
+
+    }
+
+}
+
+
+function createProfile(){
+
+    const input =
+        document.getElementById(
+            "firstNameInput"
+        );
+
+    const name =
+        input.value.trim();
+
+
+    if(!name){
+
+        input.focus();
+
+        input.style.borderColor =
+            "#ff6b9d";
+
+        return;
+
+    }
+
+
+    const profile = {
+        name:name,
+        avatar:""
+    };
+
+
+    if(
+        saveProfileData(profile)
+    ){
+
+        renderProfile();
+
+        closeProfile();
+
+    }
+
+}
+
+
+function showProfileError(message){
+
+    const error =
+        document.getElementById(
+            "profileError"
+        );
+
+    error.textContent =
+        message;
+
+    error.style.display =
+        "block";
+
+}
+
+
+function hideProfileError(){
+
+    document.getElementById(
+        "profileError"
+    ).style.display="none";
+
+}
+
+
+/* ================= IMAGE COMPRESSION ================= */
+
+function compressImage(file){
+
+    return new Promise(
+        (resolve,reject)=>{
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(event){
+
+                    const image =
+                        new Image();
+
+
+                    image.onload =
+                        function(){
+
+                            const MAX=512;
+
+                            let width =
+                                image.width;
+
+                            let height =
+                                image.height;
+
+
+                            if(
+                                width>MAX ||
+                                height>MAX
+                            ){
+
+                                if(width>height){
+
+                                    height =
+                                        height*MAX/width;
+
+                                    width=MAX;
+
+                                }else{
+
+                                    width =
+                                        width*MAX/height;
+
+                                    height=MAX;
+
+                                }
+
+                            }
+
+
+                            const canvas =
+                                document.createElement(
+                                    "canvas"
+                                );
+
+
+                            canvas.width=width;
+                            canvas.height=height;
+
+
+                            const ctx =
+                                canvas.getContext(
+                                    "2d"
+                                );
+
+
+                            ctx.drawImage(
+                                image,
+                                0,
+                                0,
+                                width,
+                                height
+                            );
+
+
+                            resolve(
+                                canvas.toDataURL(
+                                    "image/jpeg",
+                                    .78
+                                )
+                            );
+
+                        };
+
+
+                    image.onerror=reject;
+
+                    image.src =
+                        event.target.result;
+
+                };
+
+
+            reader.onerror=reject;
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+}
+
+
+/* ================= GALLERY ================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        const input =
+            document.getElementById(
+                "avatarInput"
+            );
+
+
+        if(!input)return;
+
+
+        input.addEventListener(
+            "change",
+            async function(){
+
+                hideProfileError();
+
+
+                const file =
+                    this.files[0];
+
+
+                if(!file)return;
+
+
+                if(
+                    !file.type.startsWith("image/")
+                ){
+
+                    showProfileError(
+                        "لطفاً یک عکس انتخاب کن."
+                    );
+
+                    return;
+
+                }
+
+
+                try{
+
+                    selectedAvatar =
+                        await compressImage(file);
+
+
+                    const preview =
+                        document.getElementById(
+                            "profileEditImage"
+                        );
+
+                    const icon =
+                        document.getElementById(
+                            "profileEditIcon"
+                        );
+
+
+                    preview.src =
+                        selectedAvatar;
+
+                    preview.style.display =
+                        "block";
+
+                    icon.style.display =
+                        "none";
+
+
+                }catch(e){
+
+                    showProfileError(
+                        "خواندن عکس با مشکل روبه‌رو شد."
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* ================= MINECRAFT AVATARS ================= */
+
+function selectAvatar(type){
+
+    const avatars={
+
+        steve:
+        "data:image/svg+xml;charset=UTF-8,"+
+        encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg"
+        width="512" height="512">
+        <rect width="512" height="512"
+        fill="#17102f"/>
+        <text x="256" y="340"
+        text-anchor="middle"
+        font-size="250">🧑</text>
+        </svg>`),
+
+        creeper:
+        "data:image/svg+xml;charset=UTF-8,"+
+        encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg"
+        width="512" height="512">
+        <rect width="512" height="512"
+        fill="#173b22"/>
+        <text x="256" y="340"
+        text-anchor="middle"
+        font-size="250">💚</text>
+        </svg>`),
+
+        diamond:
+        "data:image/svg+xml;charset=UTF-8,"+
+        encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg"
+        width="512" height="512">
+        <rect width="512" height="512"
+        fill="#102b35"/>
+        <text x="256" y="340"
+        text-anchor="middle"
+        font-size="250">💎</text>
+        </svg>`),
+
+        nether:
+        "data:image/svg+xml;charset=UTF-8,"+
+        encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg"
+        width="512" height="512">
+        <rect width="512" height="512"
+        fill="#3b1111"/>
+        <text x="256" y="340"
+        text-anchor="middle"
+        font-size="250">🔥</text>
+        </svg>`),
+
+        end:
+        "data:image/svg+xml;charset=UTF-8,"+
+        encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg"
+        width="512" height="512">
+        <rect width="512" height="512"
+        fill="#17122b"/>
+        <text x="256" y="340"
+        text-anchor="middle"
+        font-size="250">👁️</text>
+        </svg>`)
+
+    };
+
+
+    selectedAvatar =
+        avatars[type];
+
+
+    const preview =
+        document.getElementById(
+            "profileEditImage"
+        );
+
+    const icon =
+        document.getElementById(
+            "profileEditIcon"
+        );
+
+
+    preview.src =
+        selectedAvatar;
+
+    preview.style.display =
+        "block";
+
+    icon.style.display =
+        "none";
+
+}
+
+
+/* ================= RENDER PROFILE ================= */
+
+function renderProfile(){
+
+    const profile =
+        getProfile();
+
+
+    const login =
+        document.getElementById(
+            "profileLogin"
+        );
+
+    const view =
+        document.getElementById(
+            "profileView"
+        );
+
+    const edit =
+        document.getElementById(
+            "profileEdit"
+        );
+
+    const buttonImage =
+        document.getElementById(
+            "profileButtonImage"
+        );
+
+    const buttonIcon =
+        document.getElementById(
+            "profileButtonIcon"
+        );
+
+
+    if(!profile){
+
+        login.style.display="block";
+        view.style.display="none";
+        edit.style.display="none";
+
+        buttonImage.style.display="none";
+        buttonIcon.style.display="inline";
+
+        return;
+
+    }
+
+
+    login.style.display="none";
+    view.style.display="block";
+    edit.style.display="none";
+
+
+    document.getElementById(
+        "profileViewName"
+    ).textContent =
+        "👤 " + profile.name;
+
+
+    const viewImage =
+        document.getElementById(
+            "profileViewImage"
+        );
+
+    const viewIcon =
+        document.getElementById(
+            "profileViewIcon"
+        );
+
+
+    if(profile.avatar){
+
+        viewImage.src =
+            profile.avatar;
+
+        viewImage.style.display =
+            "block";
+
+        viewIcon.style.display =
+            "none";
+
+
+        buttonImage.src =
+            profile.avatar;
+
+        buttonImage.style.display =
+            "block";
+
+        buttonIcon.style.display =
+            "none";
+
+    }else{
+
+        viewImage.style.display =
+            "none";
+
+        viewIcon.style.display =
+            "flex";
+
+        buttonImage.style.display =
+            "none";
+
+        buttonIcon.style.display =
+            "inline";
+
+    }
+
+}
+
+
+/* ================= PROFILE OPEN ================= */
+
+function openProfile(){
+
+    renderProfile();
+
+    document.getElementById(
+        "profileOverlay"
+    ).style.display="flex";
+
+}
+
+
+function closeProfile(){
+
+    document.getElementById(
+        "profileOverlay"
+    ).style.display="none";
+
+}
+
+
+function closeProfileOutside(event){
+
+    if(
+        event.target ===
+        document.getElementById(
+            "profileOverlay"
+        )
+    ){
+
+        closeProfile();
+
+    }
+
+}
+
+
+/* ================= EDIT PROFILE ================= */
+
+function showEditProfile(){
+
+    const profile =
+        getProfile();
+
+
+    if(!profile)return;
+
+
+    document.getElementById(
+        "profileLogin"
+    ).style.display="none";
+
+    document.getElementById(
+        "profileView"
+    ).style.display="none";
+
+    document.getElementById(
+        "profileEdit"
+    ).style.display="block";
+
+
+    document.getElementById(
+        "editNameInput"
+    ).value =
+        profile.name;
+
+
+    selectedAvatar =
+        profile.avatar || "";
+
+
+    const preview =
+        document.getElementById(
+            "profileEditImage"
+        );
+
+    const icon =
+        document.getElementById(
+            "profileEditIcon"
+        );
+
+
+    if(profile.avatar){
+
+        preview.src =
+            profile.avatar;
+
+        preview.style.display =
+            "block";
+
+        icon.style.display =
+            "none";
+
+    }else{
+
+        preview.style.display =
+            "none";
+
+        icon.style.display =
+            "flex";
+
+    }
+
+
+    hideProfileError();
+
+}
+
+
+/* ================= SAVE PROFILE ================= */
+
+function saveProfile(){
+
+    const profile =
+        getProfile();
+
+
+    if(!profile)return;
+
+
+    const input =
+        document.getElementById(
+            "editNameInput"
+        );
+
+
+    const name =
+        input.value.trim();
+
+
+    if(!name){
+
+        input.focus();
+
+        return;
+
+    }
+
+
+    profile.name =
+        name;
+
+
+    if(selectedAvatar){
+
+        profile.avatar =
+            selectedAvatar;
+
+    }
+
+
+    if(
+        saveProfileData(profile)
+    ){
+
+        selectedAvatar="";
+
+        document.getElementById(
+            "avatarInput"
+        ).value="";
+
+        renderProfile();
+
+    }
+
+}
+
+
+/* ================= START ================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        renderProfile();
+
+    }
+);
 
 </script>
 
