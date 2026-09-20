@@ -1796,7 +1796,7 @@ footer{
             >
 
             <div class="avatar-title">
-                🎮 آواتار ماینکرفتی
+                🎮 آواتار های پیش فرض
             </div>
 
             <div class="minecraft-avatars">
@@ -1841,6 +1841,46 @@ footer{
                     👁️
                 </button>
 
+                <button
+    type="button"
+    class="minecraft-avatar"
+    onclick="selectAvatar('dragon')"
+>
+    🐉
+</button>
+
+<button
+    type="button"
+    class="minecraft-avatar"
+    onclick="selectAvatar('zombie')"
+>
+    🧟
+</button>
+
+<button
+    type="button"
+    class="minecraft-avatar"
+    onclick="selectAvatar('wolf')"
+>
+    🐺
+</button>
+
+<button
+    type="button"
+    class="minecraft-avatar"
+    onclick="selectAvatar('warden')"
+>
+    👹
+</button>
+
+<button
+    type="button"
+    class="minecraft-avatar"
+    onclick="selectAvatar('star')"
+>
+    ⭐
+</button>
+                
             </div>
 
             <div class="avatar-title">
@@ -2607,8 +2647,68 @@ function selectAvatar(type){
         <text x="256" y="340"
         text-anchor="middle"
         font-size="250">👁️</text>
-        </svg>`)
+        </svg>`),
+        
+dragon:
+"data:image/svg+xml;charset=UTF-8,"+
+encodeURIComponent(
+<svg xmlns="http://www.w3.org/2000/svg"
+width="512" height="512">
+<rect width="512" height="512"
+fill="#2d0f3a"/>
+<text x="256" y="340"
+text-anchor="middle"
+font-size="250">🐉</text>
+</svg>),
 
+zombie:
+"data:image/svg+xml;charset=UTF-8,"+
+encodeURIComponent(
+<svg xmlns="http://www.w3.org/2000/svg"
+width="512" height="512">
+<rect width="512" height="512"
+fill="#184220"/>
+<text x="256" y="340"
+text-anchor="middle"
+font-size="250">🧟</text>
+</svg>),
+
+wolf:
+"data:image/svg+xml;charset=UTF-8,"+
+encodeURIComponent(
+<svg xmlns="http://www.w3.org/2000/svg"
+width="512" height="512">
+<rect width="512" height="512"
+fill="#2f2f2f"/>
+<text x="256" y="340"
+text-anchor="middle"
+font-size="250">🐺</text>
+</svg>),
+
+warden:
+"data:image/svg+xml;charset=UTF-8,"+
+encodeURIComponent(
+<svg xmlns="http://www.w3.org/2000/svg"
+width="512" height="512">
+<rect width="512" height="512"
+fill="#102b35"/>
+<text x="256" y="340"
+text-anchor="middle"
+font-size="250">👹</text>
+</svg>),
+
+star:
+"data:image/svg+xml;charset=UTF-8,"+
+encodeURIComponent(
+<svg xmlns="http://www.w3.org/2000/svg"
+width="512" height="512">
+<rect width="512" height="512"
+fill="#3a2d10"/>
+<text x="256" y="340"
+text-anchor="middle"
+font-size="250">⭐</text>
+</svg>),
+    
     };
 
 
